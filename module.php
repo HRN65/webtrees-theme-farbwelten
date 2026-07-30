@@ -52,7 +52,7 @@ return new class extends MinimalTheme implements ModuleCustomInterface {
 
     public function customModuleVersion(): string
     {
-        return '1.0.0';
+        return '1.0.1';
     }
 
     public function customModuleLatestVersionUrl(): string

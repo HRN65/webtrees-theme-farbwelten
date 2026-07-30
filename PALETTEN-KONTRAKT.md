@@ -89,7 +89,14 @@ Schrift = `--fa-header-fg`-äquivalent als konkreter Hexwert, „trees"-tspan
 2. Alle Farbpaare müssen WCAG-AA-Kontrast einhalten (Fließtext ≥ 4.5:1).
 3. `[dir]`-Präfix nur verwenden, wenn minimal.min.css an gleicher Stelle
    Spezifität erzwingt (siehe base.css).
-4. Dark-Paletten müssen zusätzlich abdecken: `.form-control`/`.form-select`
+4. Tabellenflächen ausschließlich über `--bs-table-bg` **an der Zelle** setzen.
+   Bootstrap 5.3 füllt jede Zelle selbst (`.table>:not(caption)>*>*`, 0-1-2);
+   Flächen an `thead`/`tr` liegen dahinter, niedriger spezifische `th`-Regeln
+   verlieren.
+5. `--fa-sex-*-bg` transluzent halten: base.css legt sie als `background-image`
+   über `--fa-chart-box-bg`. Deckende Werte funktionieren, machen
+   `--fa-chart-box-bg` in den Boxen aber wirkungslos.
+6. Dark-Paletten müssen zusätzlich abdecken: `.form-control`/`.form-select`
    (dunkle Inputs), `.modal-content`, `.dropdown-menu`, `.table`-Textfarbe,
    Bootstrap `--bs-body-*`-Überschreibungen macht base.css bereits aus den
    `--fa-*`-Werten — NICHT erneut setzen.

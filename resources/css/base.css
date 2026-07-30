@@ -221,11 +221,16 @@ a:hover, a:focus {
 }
 
 .table > thead {
-  background: var(--fa-table-head-bg);
   font-family: var(--fa-font-heading);
 }
 
-.table > thead th {
+/* Bootstrap 5.3 füllt jede Zelle einzeln (.table>:not(caption)>*>*, 0-1-2)
+   mit --bs-table-bg. Eine Fläche am <thead> läge dahinter und ein
+   niedriger spezifisches th-Regelwerk verliert — Kopffarbe deshalb als
+   Variable an der Zelle setzen. */
+.table > thead > tr > th,
+.table > thead > tr > td {
+  --bs-table-bg: var(--fa-table-head-bg);
   color: var(--fa-primary);
   border-bottom: 2px solid var(--fa-accent);
 }
@@ -254,16 +259,23 @@ a:hover, a:focus {
   border-color: var(--fa-border);
 }
 
-.wt-facts-table th {
-  background: var(--fa-table-head-bg);
+/* Fallback für Fremdmodule, die .wt-facts-table ohne .table ausgeben —
+   dort greift die Bootstrap-Zellenregel nicht, also auch nicht --bs-table-bg. */
+.wt-facts-table th { background: var(--fa-table-head-bg); }
+.wt-facts-table td { background: var(--fa-card); }
+
+/* webtrees selbst kombiniert immer .table mit .wt-facts-table; Fläche und
+   Textfarbe müssen die Bootstrap-Zellenregel (0-1-2) überbieten, siehe oben. */
+.table.wt-facts-table th {
+  --bs-table-bg: var(--fa-table-head-bg);
   color: var(--fa-primary);
   font-family: var(--fa-font-heading);
   font-weight: normal;
   border-color: var(--fa-border);
 }
 
-.wt-facts-table td {
-  background: var(--fa-card);
+.table.wt-facts-table td {
+  --bs-table-bg: var(--fa-card);
   border-color: var(--fa-border);
 }
 
@@ -332,23 +344,27 @@ a:hover, a:focus {
   color: var(--fa-fg);
 }
 
+/* Die Geschlechts-Tints sind transparent (siehe Kontrakt). Als
+   background-image liegen sie über der Fläche aus .wt-chart-box; die
+   Kurzschreibweise background hätte --fa-chart-box-bg verworfen und den
+   Tint direkt auf den Seitengrund gelegt. */
 .wt-chart-box-m {
-  background: var(--fa-sex-m-bg);
+  background-image: linear-gradient(var(--fa-sex-m-bg), var(--fa-sex-m-bg));
   border-color: var(--fa-sex-m);
 }
 
 .wt-chart-box-f {
-  background: var(--fa-sex-f-bg);
+  background-image: linear-gradient(var(--fa-sex-f-bg), var(--fa-sex-f-bg));
   border-color: var(--fa-sex-f);
 }
 
 .wt-chart-box-u {
-  background: var(--fa-sex-u-bg);
+  background-image: linear-gradient(var(--fa-sex-u-bg), var(--fa-sex-u-bg));
   border-color: var(--fa-sex-u);
 }
 
 .wt-chart-box-x {
-  background: var(--fa-sex-x-bg);
+  background-image: linear-gradient(var(--fa-sex-x-bg), var(--fa-sex-x-bg));
   border-color: var(--fa-sex-x);
 }
 
