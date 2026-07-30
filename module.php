@@ -52,7 +52,7 @@ return new class extends MinimalTheme implements ModuleCustomInterface {
 
     public function customModuleVersion(): string
     {
-        return '1.0.2';
+        return '1.1.0';
     }
 
     public function customModuleLatestVersionUrl(): string
@@ -125,6 +125,17 @@ return new class extends MinimalTheme implements ModuleCustomInterface {
         Session::put('fa-palette', $palette);
 
         return response();
+    }
+
+    /**
+     * Bootstrap 5.3 has no `[data-bs-theme=auto]`, so "auto" falls back to the
+     * light values in `:root` — even under the dark palette. Anything base.css
+     * does not derive from `--fa-*` (alerts, close buttons, select arrows,
+     * DataTables stripes) would stay light. Hence: scheme follows palette.
+     */
+    public function bootstrapColorScheme(): string
+    {
+        return $this->palette() === 'dunkel' ? 'dark' : 'light';
     }
 
     /**

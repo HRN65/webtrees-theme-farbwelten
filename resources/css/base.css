@@ -156,15 +156,22 @@ a:hover, a:focus {
   --bs-btn-hover-color: var(--fa-link-hover);
 }
 
-/* ── Formulare ── */
+/* ── Formulare ──────────────────────────────────────────────────
+   vendor.min.css ist RTL-vorverarbeitet: rtlcss hat jede Regel mit
+   richtungsabhängigen Eigenschaften mit [dir] versehen, Bootstrap steht
+   dort also bei 0-2-0. Wo wir dieselben Eigenschaften setzen, brauchen
+   wir dasselbe Präfix — sonst bleibt die Regel wirkungslos (Kontrakt
+   Regel 3). Gilt für Formulare, Blätterleiste und Dialoge. */
 
-.form-control, .form-select {
+[dir] .form-control,
+[dir] .form-select {
   background-color: var(--fa-input-bg);
   border-color: var(--fa-input-border);
   color: var(--fa-fg);
 }
 
-.form-control:focus, .form-select:focus {
+[dir] .form-control:focus,
+[dir] .form-select:focus {
   background-color: var(--fa-input-bg);
   border-color: var(--fa-link);
   color: var(--fa-fg);
@@ -175,12 +182,12 @@ a:hover, a:focus {
   color: var(--fa-muted);
 }
 
-.form-check-input:checked {
+[dir] .form-check-input:checked {
   background-color: var(--fa-btn-bg);
   border-color: var(--fa-btn-bg);
 }
 
-.input-group-text {
+[dir] .input-group-text {
   background-color: var(--fa-table-head-bg);
   border-color: var(--fa-input-border);
   color: var(--fa-fg);
@@ -194,7 +201,7 @@ a:hover, a:focus {
   --bs-card-cap-bg: var(--fa-table-head-bg);
 }
 
-.card-header {
+[dir] .card-header {
   font-family: var(--fa-font-heading);
   color: var(--fa-primary);
   border-bottom: 1px solid var(--fa-border);
@@ -242,13 +249,13 @@ a:hover, a:focus {
   color: var(--fa-btn-fg);
 }
 
-.page-link {
+[dir] .page-link {
   color: var(--fa-link);
   background-color: var(--fa-card);
   border-color: var(--fa-border);
 }
 
-.page-link:hover {
+[dir] .page-link:hover {
   color: var(--fa-link-hover);
   background-color: var(--fa-table-head-bg);
 }
@@ -322,7 +329,7 @@ a:hover, a:focus {
   --bs-dropdown-border-color: var(--fa-border);
 }
 
-.modal-content {
+[dir] .modal-content {
   background-color: var(--fa-card);
   color: var(--fa-fg);
   border-color: var(--fa-border);

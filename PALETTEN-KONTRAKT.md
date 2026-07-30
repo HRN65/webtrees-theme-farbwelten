@@ -91,8 +91,20 @@ Schrift = `--fa-header-fg`-äquivalent als konkreter Hexwert, „trees"-tspan
 1. Keine Struktur-Selektoren in Paletten duplizieren, die base.css schon setzt —
    nur Variablen + echte palettenspezifische Ausnahmen.
 2. Alle Farbpaare müssen WCAG-AA-Kontrast einhalten (Fließtext ≥ 4.5:1).
-3. `[dir]`-Präfix nur verwenden, wenn minimal.min.css an gleicher Stelle
-   Spezifität erzwingt (siehe base.css).
+3. **Spezifität der Fremd-CSS beachten — die häufigste Falle.**
+   `vendor.min.css` ist RTL-vorverarbeitet: rtlcss hat jede Regel mit
+   richtungsabhängigen Eigenschaften (Innenabstand, Rahmen, Hintergrund-
+   position …) mit `[dir]` versehen. Bootstrap steht dort also bei **0-2-0**,
+   nicht bei 0-1-0. `minimal.min.css` macht es bei Diagrammen genauso.
+   Überschreibt man dort eine Eigenschaft mit einfacher Klassenregel, ist sie
+   **wirkungslos** — ohne Fehlermeldung.
+   Reihenfolge der Mittel:
+   1. Über eine Variable eingreifen, die der Kern selbst ausliest
+      (`--bs-*`, `--sex-*-bg/-fg`, `--chart-line`). Immun gegen Spezifität.
+   2. Sonst dasselbe `[dir]`-Präfix setzen wie die Fremdregel; unsere Dateien
+      laden später und gewinnen dann bei Gleichstand.
+   Prüfen lässt sich das nur gerendert, nicht durch Lesen — siehe die
+   Messstände im Entwicklungsverlauf (Brave headless, `--dump-dom`).
 4. Tabellenflächen ausschließlich über `--bs-table-bg` **an der Zelle** setzen.
    Bootstrap 5.3 füllt jede Zelle selbst (`.table>:not(caption)>*>*`, 0-1-2);
    Flächen an `thead`/`tr` liegen dahinter, niedriger spezifische `th`-Regeln
@@ -100,7 +112,13 @@ Schrift = `--fa-header-fg`-äquivalent als konkreter Hexwert, „trees"-tspan
 5. `--fa-sex-*-bg` transluzent halten: base.css legt sie als `background-image`
    über `--fa-chart-box-bg`. Deckende Werte funktionieren, machen
    `--fa-chart-box-bg` in den Boxen aber wirkungslos.
-6. Dark-Paletten müssen zusätzlich abdecken: `.form-control`/`.form-select`
-   (dunkle Inputs), `.modal-content`, `.dropdown-menu`, `.table`-Textfarbe,
+6. Dunkle Paletten brauchen **keinen** eigenen Sonderfall-Block mehr.
+   `module.php` meldet über `bootstrapColorScheme()` das passende Schema
+   (`dark` für Dunkel, sonst `light`), womit Bootstrap seine eigenen
+   Dunkel-Werte für alles liefert, was base.css nicht aus `--fa-*` ableitet:
+   Meldungsfelder, Schließen-Symbol, Select-Pfeil, DataTables-Streifen.
+   Formulare, Dialoge, Menüs und Tabellen deckt base.css ab. Wer eine neue
+   dunkle Palette anlegt, trägt ihren Namen in `bootstrapColorScheme()` ein
+   und beschränkt sich sonst auf echte Ausnahmen.
    Bootstrap `--bs-body-*`-Überschreibungen macht base.css bereits aus den
    `--fa-*`-Werten — NICHT erneut setzen.

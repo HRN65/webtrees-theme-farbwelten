@@ -83,53 +83,13 @@
   --fa-shadow: 0 2px 14px rgba(0, 0, 0, .55);
 }
 
-/* ── Dark-Sonderfälle (Kontrakt-Regel 4) ─────────────────────
-   Bootstrap-Defaults, die base.css nicht aus Variablen ableitet. */
-
-.form-control,
-.form-select {
-  background-color: var(--fa-input-bg);
-  color: var(--fa-fg);
-  border-color: var(--fa-input-border);
-}
-
-.form-control:focus,
-.form-select:focus {
-  background-color: var(--fa-input-bg);
-  color: var(--fa-fg);
-}
+/* ── Dark-Sonderfälle (Kontrakt-Regel 6) ─────────────────────
+   Seit das Theme `data-bs-theme="dark"` meldet (module.php), liefert
+   Bootstrap seine eigenen Dunkel-Werte für alles, was base.css nicht
+   ausdrücklich aus `--fa-*` ableitet — Meldungsfelder, Schließen-Symbol,
+   Select-Pfeil, DataTables-Streifen. Formulare, Dialoge, Menüs und
+   Tabellen deckt base.css ab. Übrig bleibt eine Feinheit: */
 
 .form-control::placeholder {
-  color: #8d8578; /* 4.7:1 auf --fa-input-bg */
-}
-
-/* Bootstrap-Pfeil des Selects ist dunkel eingebettet — helle Variante */
-.form-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23a8a094' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-.modal-content {
-  background-color: var(--fa-card);
-  color: var(--fa-fg);
-  border-color: var(--fa-border);
-}
-
-.dropdown-menu {
-  background-color: var(--fa-card);
-  color: var(--fa-fg);
-  border-color: var(--fa-border);
-}
-
-.dropdown-menu .dropdown-item {
-  color: var(--fa-fg);
-}
-
-.dropdown-menu .dropdown-item:hover,
-.dropdown-menu .dropdown-item:focus {
-  background-color: var(--fa-table-hover);
-  color: var(--fa-fg);
-}
-
-.table {
-  color: var(--fa-fg);
+  color: #8d8578; /* 4.7:1 auf --fa-input-bg, statt --fa-muted auf --fa-bg */
 }

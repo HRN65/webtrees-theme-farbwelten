@@ -1,5 +1,39 @@
 # Changelog
 
+## v1.1.0 (2026-07-30)
+
+Struktur: Farbschema an die Palette gekoppelt, verdeckte Regeln repariert.
+
+- **`bootstrapColorScheme()`** meldet jetzt `dark` für die Palette Dunkel und
+  `light` für Hell, Sepia und Bordeaux. Vorher erbte das Theme `auto` vom
+  `MinimalTheme` — und Bootstrap 5.3 kennt kein `[data-bs-theme=auto]`, es
+  griffen also die Hell-Werte aus `:root`, auch in der dunklen Palette.
+  Gemessen behoben: Hinweisfelder (Fläche `#cff4fc` → `#032830`, Kontrast
+  7,7:1 → 10,0:1), Warnfelder (`#fff3cd` → `#332701`, 7,2:1 → 10,8:1),
+  Schließen-Symbol (`filter: none` → `invert(1)`, vorher schwarz auf dunkel
+  bei 1,3:1) und die DataTables-Variablen `--dt-row-stripe`, `--dt-row-hover`
+  und `--dt-column-ordering` (`0,0,0` → `255,255,255`). Für die drei hellen
+  Paletten ändert sich nachweislich nichts — `auto` und `light` liefern
+  identische Werte in allen geprüften Komponenten.
+- **Sechzehn wirkungslose Regeln repariert.** `vendor.min.css` ist
+  RTL-vorverarbeitet: rtlcss versieht jede Regel mit richtungsabhängigen
+  Eigenschaften mit `[dir]`, Bootstrap steht dort bei Spezifität 0-2-0. Unsere
+  einfachen Klassenregeln bei 0-1-0 kamen nie an. Betroffen waren Eingabe- und
+  Auswahlfelder samt Fokus, Kontrollkästchen, Eingabegruppen, Kartenköpfe,
+  Blätterleiste und Dialoge — **in allen vier Paletten**. In Dunkel etwa
+  standen Eingabefelder auf dem Seitengrund `#14181f` statt auf
+  `--fa-input-bg` `#171c24`, Dialoge ebenso statt auf `--fa-card`.
+- **`palette-dunkel.css` um 47 Zeilen kürzer.** Der handgeschriebene
+  Sonderfall-Block für Formulare, Dialoge, Menüs, Select-Pfeil und
+  Tabellentext ist überflüssig geworden; übrig bleibt die Platzhalterfarbe.
+- `PALETTEN-KONTRAKT.md`: Regel 3 beschreibt jetzt die Spezifitätsfalle samt
+  Reihenfolge der Gegenmittel, Regel 6 ersetzt den Sonderfall-Block durch den
+  Eintrag in `bootstrapColorScheme()`.
+
+Geprüft mit einem Komponentenspiegel in Brave (headless): 21 Bootstrap-Bau-
+teile, beide Schemata nebeneinander, berechnete Farben und WCAG-Kontraste
+ausgelesen statt geschätzt. Hell erreicht durchgehend ≥ 4,7:1.
+
 ## v1.0.2 (2026-07-30)
 
 Nachtrag zu v1.0.1: die Diagramm-Boxen waren dort **nicht** behoben.
