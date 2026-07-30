@@ -66,6 +66,10 @@ Ladereihenfolge pro Theme: `minimal.min.css` → `base.css` → `palette-<name>.
   /* Diagramme */
   --fa-chart-line:   #9a938a;  /* Verbindungslinien Pedigree/Descendants */
   --fa-chart-box-bg: #ffffff;  /* Grundfläche wt-chart-box */
+  /* optional, Standard .75rem: Schrift in den Boxen. Die Boxhöhe ist im Kern
+     fest; bei .8125rem läuft ein zweizeiliger Name über und verdrängt die
+     Todeszeile (im Browser gemessen). */
+  --fa-chart-box-font-size: .75rem;
 
   /* Sonstiges */
   --fa-shadow: 0 2px 10px rgba(30, 58, 95, .25); /* Header-/Karten-Schatten */
