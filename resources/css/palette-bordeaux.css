@@ -55,15 +55,16 @@
   --fa-btn-fg:       #f7ede8;
   --fa-btn-hover-bg: #8a2f42;
 
-  /* Geschlechts-Tints — wie „Hell", leicht warm abgestimmt */
+  /* Geschlechtsfarben — wie „Hell", leicht warm abgestimmt.
+     -*-bg deckend über --fa-chart-box-bg: 16 % m/f, 14 % u/x. */
   --fa-sex-m: #84beff;
   --fa-sex-f: #ff88aa;
   --fa-sex-u: #88cc88;
   --fa-sex-x: #ccaa88;
-  --fa-sex-m-bg: rgba(132, 190, 255, .16);
-  --fa-sex-f-bg: rgba(255, 136, 170, .16);
-  --fa-sex-u-bg: rgba(136, 204, 136, .14);
-  --fa-sex-x-bg: rgba(204, 170, 136, .14);
+  --fa-sex-m-bg: #ebf0f8;
+  --fa-sex-f-bg: #ffe8eb;
+  --fa-sex-u-bg: #eef4e7;
+  --fa-sex-x-bg: #f8efe7;
 
   /* Diagramme */
   --fa-chart-line:   #a1938b;  /* Verbindungslinien Pedigree/Descendants */

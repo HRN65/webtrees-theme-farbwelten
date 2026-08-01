@@ -351,11 +351,16 @@ a:hover, a:focus {
 
 :root,
 [data-bs-theme] {
-  /* Fläche der Boxen; der transluzente Tint liegt darüber (s. u.) */
-  --sex-m-bg: var(--fa-chart-box-bg);
-  --sex-f-bg: var(--fa-chart-box-bg);
-  --sex-u-bg: var(--fa-chart-box-bg);
-  --sex-x-bg: var(--fa-chart-box-bg);
+  /* Fläche der Boxen, deckend und geschlechtsspezifisch.
+     Nicht neutral einfärben und den Tint per background-image
+     darüberlegen: Aus --sex-*-bg schöpfen auch Fremdmodule, die als
+     SVG zeichnen (MagicSunday Pedigree/Descendants/Fan setzen damit
+     ihr fill), und SVG kennt kein background-image. Sie bekämen dann
+     vier identische Flächen ohne Geschlechtsunterschied. */
+  --sex-m-bg: var(--fa-sex-m-bg);
+  --sex-f-bg: var(--fa-sex-f-bg);
+  --sex-u-bg: var(--fa-sex-u-bg);
+  --sex-x-bg: var(--fa-sex-x-bg);
 
   /* Rahmen der Boxen */
   --sex-m-fg: var(--fa-sex-m);
@@ -390,23 +395,57 @@ a:hover, a:focus {
   font-size: var(--fa-chart-box-font-size);
 }
 
-/* Die Geschlechts-Tints sind transluzent (siehe Kontrakt) und liegen als
-   background-image über der Fläche aus --sex-*-bg. Das [dir]-Präfix ist
-   nötig, um die Kernregel gleicher Spezifität zu überschreiben. */
-[dir] .wt-chart-box-m {
-  background-image: linear-gradient(var(--fa-sex-m-bg), var(--fa-sex-m-bg));
+/* Die Geschlechtsfläche selbst braucht hier keine Regel mehr: Der Kern
+   setzt sie in [dir] .wt-chart-box-m/-f/-u/-x aus --sex-*-bg, und die
+   zeigen oben auf die Palettenwerte. */
+
+/* Familien-Navigator (Seitenleiste) und die Familienblöcke der
+   Personenseite färben ihre Zeilen über wt-sex-m/-f/-u/-x. Regeln dafür
+   haben nur die Kern-Themes webtrees, clouds, colors, fab und xenea;
+   minimal.min.css bringt keine mit, und von dort erbt dieses Theme.
+   Deshalb hier selbst, im Zuschnitt der Kern-Themes.
+   Die Fläche läuft wie in Regel 4 über --bs-table-bg an der Zelle; das
+   background-color daneben ist der Fallback für .wt-facts-table ohne
+   .table, analog zu den Regeln oben. Beide müssen die 0-2-1 von
+   .table.wt-facts-table td überbieten — mit [dir] stehen sie bei 0-3-1. */
+[dir] .wt-facts-table .wt-sex-m > td {
+  --bs-table-bg: var(--sex-m-bg);
+  background-color: var(--sex-m-bg);
+  border: thin solid var(--sex-m-fg);
 }
 
-[dir] .wt-chart-box-f {
-  background-image: linear-gradient(var(--fa-sex-f-bg), var(--fa-sex-f-bg));
+[dir] .wt-facts-table .wt-sex-f > td {
+  --bs-table-bg: var(--sex-f-bg);
+  background-color: var(--sex-f-bg);
+  border: thin solid var(--sex-f-fg);
 }
 
-[dir] .wt-chart-box-u {
-  background-image: linear-gradient(var(--fa-sex-u-bg), var(--fa-sex-u-bg));
+[dir] .wt-facts-table .wt-sex-u > td {
+  --bs-table-bg: var(--sex-u-bg);
+  background-color: var(--sex-u-bg);
+  border: thin solid var(--sex-u-fg);
 }
 
-[dir] .wt-chart-box-x {
-  background-image: linear-gradient(var(--fa-sex-x-bg), var(--fa-sex-x-bg));
+[dir] .wt-facts-table .wt-sex-x > td {
+  --bs-table-bg: var(--sex-x-bg);
+  background-color: var(--sex-x-bg);
+  border: thin solid var(--sex-x-fg);
+}
+
+/* Namen in den eingefärbten Zeilen in --fa-primary statt --fa-link.
+   Auf den Tints fällt --fa-link in „Hell" auf 4,2–4,4:1 und reißt damit
+   AA (Kontrakt Regel 2); --fa-primary trägt in allen vier Paletten
+   (5,7:1 in Dunkel bis 10,9:1 in Bordeaux). Es ist ohnehin die Farbe,
+   in der dieses Theme Personennamen führt — siehe .wt-chart-box-name.
+   Weil --fa-primary und --fa-link-hover in Hell, Sepia und Bordeaux
+   zusammenfallen, trägt die Unterstreichung die Hover-Rückmeldung. */
+.wt-facts-table :is(.wt-sex-m, .wt-sex-f, .wt-sex-u, .wt-sex-x) > td a {
+  color: var(--fa-primary);
+}
+
+.wt-facts-table :is(.wt-sex-m, .wt-sex-f, .wt-sex-u, .wt-sex-x) > td a:hover {
+  color: var(--fa-link-hover);
+  text-decoration: underline;
 }
 
 .wt-chart-box-name {

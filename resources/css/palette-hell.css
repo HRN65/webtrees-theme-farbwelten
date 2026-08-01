@@ -52,15 +52,18 @@
   --fa-btn-fg:       #f5f3ef;
   --fa-btn-hover-bg: #2E75B6;
 
-  /* Geschlechts-Tints (wt-chart-box-m/-f/-u/-x, Icons) */
+  /* Geschlechtsfarben: -m/-f/-u/-x sind Rahmen und Icons,
+     -*-bg die deckenden Flächen (Diagramm-Boxen, Familien-Navigator).
+     Deckend, weil auch SVG-Diagramme daraus schöpfen — siehe Kontrakt.
+     Werte = Tint über --fa-chart-box-bg: 18 % m/f, 15 % u/x. */
   --fa-sex-m: #84beff;
   --fa-sex-f: #ff88aa;
   --fa-sex-u: #88cc88;
   --fa-sex-x: #ccaa88;
-  --fa-sex-m-bg: rgba(132, 190, 255, .18);
-  --fa-sex-f-bg: rgba(255, 136, 170, .18);
-  --fa-sex-u-bg: rgba(136, 204, 136, .15);
-  --fa-sex-x-bg: rgba(204, 170, 136, .15);
+  --fa-sex-m-bg: #e9f3ff;
+  --fa-sex-f-bg: #ffeaf0;
+  --fa-sex-u-bg: #edf7ed;
+  --fa-sex-x-bg: #f7f2ed;
 
   /* Diagramme */
   --fa-chart-line:   #9a938a;  /* Verbindungslinien Pedigree/Descendants */

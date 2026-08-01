@@ -53,15 +53,17 @@ Ladereihenfolge pro Theme: `minimal.min.css` → `base.css` → `palette-<name>.
   --fa-btn-fg:       #f5f3ef;
   --fa-btn-hover-bg: #2E75B6;
 
-  /* Geschlechts-Tints (wt-chart-box-m/-f/-u/-x, Icons) */
+  /* Geschlechtsfarben: -m/-f/-u/-x = Rahmen und Icons,
+     -*-bg = deckende Flächen (Diagramm-Boxen, Familien-Navigator).
+     Deckend, nicht transluzent — siehe Regel 5. */
   --fa-sex-m: #84beff;
   --fa-sex-f: #ff88aa;
   --fa-sex-u: #88cc88;
   --fa-sex-x: #ccaa88;
-  --fa-sex-m-bg: rgba(132, 190, 255, .18);
-  --fa-sex-f-bg: rgba(255, 136, 170, .18);
-  --fa-sex-u-bg: rgba(136, 204, 136, .15);
-  --fa-sex-x-bg: rgba(204, 170, 136, .15);
+  --fa-sex-m-bg: #e9f3ff;
+  --fa-sex-f-bg: #ffeaf0;
+  --fa-sex-u-bg: #edf7ed;
+  --fa-sex-x-bg: #f7f2ed;
 
   /* Diagramme */
   --fa-chart-line:   #9a938a;  /* Verbindungslinien Pedigree/Descendants */
@@ -109,9 +111,15 @@ Schrift = `--fa-header-fg`-äquivalent als konkreter Hexwert, „trees"-tspan
    Bootstrap 5.3 füllt jede Zelle selbst (`.table>:not(caption)>*>*`, 0-1-2);
    Flächen an `thead`/`tr` liegen dahinter, niedriger spezifische `th`-Regeln
    verlieren.
-5. `--fa-sex-*-bg` transluzent halten: base.css legt sie als `background-image`
-   über `--fa-chart-box-bg`. Deckende Werte funktionieren, machen
-   `--fa-chart-box-bg` in den Boxen aber wirkungslos.
+5. `--fa-sex-*-bg` **deckend** halten. base.css reicht sie unverändert an die
+   Kern-Variablen `--sex-*-bg` weiter, und daraus schöpfen nicht nur die
+   HTML-Boxen des Kerns, sondern auch Fremdmodule, die als SVG zeichnen —
+   MagicSunday Pedigree/Descendants/Fan setzen damit ihr `fill`. SVG kennt
+   kein `background-image`, ein transluzenter Tint als Overlay käme dort also
+   nie an und alle vier Flächen sähen gleich aus. Wer einen Tint-Prozentsatz
+   im Kopf hat: über `--fa-chart-box-bg` rechnen und den deckenden Wert
+   eintragen (Formel `Tint·α + Fläche·(1−α)`), den Prozentsatz im Kommentar
+   vermerken.
 6. Dunkle Paletten brauchen **keinen** eigenen Sonderfall-Block mehr.
    `module.php` meldet über `bootstrapColorScheme()` das passende Schema
    (`dark` für Dunkel, sonst `light`), womit Bootstrap seine eigenen

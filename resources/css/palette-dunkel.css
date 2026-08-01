@@ -65,15 +65,16 @@
   --fa-btn-fg:       #14181f;
   --fa-btn-hover-bg: #eab654;
 
-  /* Geschlechts-Tints: gedämpft/transparent, damit sie nicht leuchten */
+  /* Geschlechtsfarben: gedämpft, damit sie auf Dunkel nicht leuchten.
+     -*-bg deckend über --fa-chart-box-bg: 14 % m/f, 12 % u/x. */
   --fa-sex-m: #7396bd;
   --fa-sex-f: #bd7f96;
   --fa-sex-u: #7ba87b;
   --fa-sex-x: #ab9070;
-  --fa-sex-m-bg: rgba(115, 150, 189, .14);
-  --fa-sex-f-bg: rgba(189, 127, 150, .14);
-  --fa-sex-u-bg: rgba(123, 168, 123, .12);
-  --fa-sex-x-bg: rgba(171, 144, 112, .12);
+  --fa-sex-m-bg: #293340;
+  --fa-sex-f-bg: #33303b;
+  --fa-sex-u-bg: #283335;
+  --fa-sex-x-bg: #2e3034;
 
   /* Diagramme */
   --fa-chart-line:   #5a626e;

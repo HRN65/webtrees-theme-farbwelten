@@ -1,5 +1,37 @@
 # Changelog
 
+## v1.2.0 (2026-08-01)
+
+Geschlechtsfarben: eine Quelle für Kern, Fremdmodule und Navigator.
+
+- **Diagramme von MagicSunday zeigten weiße Boxen ohne Geschlechtsfarbe**
+  (Pedigree, Descendants, Fan). Diese Module zeichnen als SVG und füllen ihre
+  Rechtecke direkt aus den Kern-Variablen, z. B.
+  `fill: var(--sex-f-bg, rgb(233, 218, 241))`. base.css flachte genau die
+  aber auf eine neutrale Fläche ab (`--sex-*-bg: var(--fa-chart-box-bg)`) und
+  legte den Geschlechts-Tint erst als `background-image` darüber — ein
+  Mechanismus, den SVG nicht kennt. In den Charts blieb deshalb nur die
+  Grundfläche übrig, in Hell `#ffffff`, in allen vier Paletten.
+  `--fa-sex-*-bg` sind jetzt **deckende** Farben und werden unverändert an
+  `--sex-*-bg` durchgereicht; das `background-image`-Overlay entfällt. Die
+  Werte sind aus den bisherigen Tints über `--fa-chart-box-bg` ausgerechnet,
+  die Kern-Boxen sehen also aus wie vorher.
+- **Familien-Navigator färbt seine Zeilen wieder nach Geschlecht.** Er setzt
+  `wt-sex-m/-f/-u/-x` auf die Zeilen; Regeln dafür haben nur die Kern-Themes
+  webtrees, clouds, colors, fab und xenea — `minimal.min.css`, von dem dieses
+  Theme erbt, bringt keine mit. Die Farbe hat dort also nie existiert. base.css
+  liefert sie jetzt selbst nach, im Zuschnitt der Kern-Themes und über
+  `--bs-table-bg` an der Zelle (Regel 4). Die Namen in diesen Zeilen laufen
+  dort über `--fa-primary` statt `--fa-link`: Auf den Tints fiele `--fa-link`
+  in „Hell" auf 4,2–4,4:1 und risse AA. Gemessen jetzt 5,7:1 (Dunkel) bis
+  10,9:1 (Bordeaux); es ist ohnehin die Farbe, in der dieses Theme
+  Personennamen führt.
+- `PALETTEN-KONTRAKT.md`: Regel 5 fordert jetzt deckende `--fa-sex-*-bg` statt
+  transluzenter, mit der Begründung aus den SVG-Modulen und der Umrechnung.
+
+Gemeldet von @HRN65 in
+[#1](https://github.com/thobgg/webtrees-theme-farbwelten/issues/1).
+
 ## v1.1.0 (2026-07-30)
 
 Struktur: Farbschema an die Palette gekoppelt, verdeckte Regeln repariert.
