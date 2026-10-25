@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModuleAction;
 use Fisharebest\Webtrees\Menu;
 use Fisharebest\Webtrees\Module\MinimalTheme;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -157,7 +158,7 @@ return new class extends MinimalTheme implements ModuleCustomInterface {
         $palette = $this->palette();
 
         foreach ($this->palettes() as $palette_id => $palette_name) {
-            $url = route('module', ['module' => $this->name(), 'action' => 'Palette', 'palette' => $palette_id]);
+            $url = route(ModuleAction::class, ['module' => $this->name(), 'action' => 'Palette', 'palette' => $palette_id]);
 
             $menu->addSubmenu(new Menu(
                 $palette_name,
