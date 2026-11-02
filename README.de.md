@@ -1,5 +1,7 @@
 # Farbwelten
 
+> **Nicht mehr gepflegt.** Dieses Modul ist seit November 2026 archiviert. Es läuft weiter mit webtrees 2.2, Aktualisierungen gibt es keine mehr.
+
 Ein Theme für [webtrees](https://webtrees.net) 2.2 mit vier Farbpaletten in einem einzigen Modul. Die Palette lässt sich im Kopfmenü umschalten, wie beim Core-Theme „colors".
 
 *English version: [README.md](README.md)*
