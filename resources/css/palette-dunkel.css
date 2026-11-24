@@ -22,7 +22,8 @@
   color-scheme: dark;
 
   /* Typografie */
-  --fa-font-heading: Georgia, "Times New Roman", serif;
+  /*--fa-font-heading: Georgia, "Times New Roman", serif;
+  --fa-font-heading: Arial, sans-serif;    /* Überschriften, Seitentitel */
   --fa-font-body:    system-ui, -apple-system, sans-serif;
 
   /* Grundflächen */
