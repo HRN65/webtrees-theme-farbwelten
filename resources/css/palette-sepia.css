@@ -12,9 +12,9 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root {
-  /* Typografie — Serif auch im Fließtext (Druckoptik) */
-  --fa-font-heading: Georgia, "Times New Roman", serif;
-  --fa-font-body:    Georgia, "Times New Roman", serif;
+  /* Typografie */
+  --fa-font-heading: Arial, sans-serif;    /* Überschriften, Seitentitel */
+  --fa-font-body:    system-ui, -apple-system, sans-serif; /* Fließtext */
 
   /* Grundflächen — Papier und Karton */
   --fa-bg:      #eee1c2;   /* Seitenhintergrund: gealtertes Papier */
