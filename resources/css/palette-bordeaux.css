@@ -10,7 +10,8 @@
 
 :root {
   /* Typografie */
-  --fa-font-heading: Georgia, "Times New Roman", serif;    /* Überschriften, Seitentitel */
+  /*--fa-font-heading: Georgia, "Times New Roman", serif;    /* Überschriften, Seitentitel */
+  --fa-font-heading: Arial, sans-serif;    /* Überschriften, Seitentitel */
   --fa-font-body:    system-ui, -apple-system, sans-serif; /* Fließtext */
 
   /* Grundflächen */
